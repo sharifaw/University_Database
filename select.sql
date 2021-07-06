@@ -27,12 +27,13 @@ WHERE student_id = 1;
 
 --   6. get the list of courses which a certain student has registered in
 --      (e.g. for student_id = 3, hint: use joins).
-SELECT count(*) from student_courses
+SELECT courses.title from student_courses 
+join courses 
+on student_courses.course_id = courses.id
 where student_id = 1;
 
 --    7. get a list of courses that a certain teacher teaches 
 --       (e.g. teacher_id = 3, show all course info, use joins).
-SELECT * from teachers 
-join courses
-on teachers.id = courses.teacher_id 
-where teachers.id = 2;
+SELECT * from courses 
+WHERE  teacher_id =2;
+
