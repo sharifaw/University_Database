@@ -37,3 +37,38 @@ where student_id = 1;
 SELECT * from courses 
 WHERE  teacher_id =2;
 
+--  Extra Tasks
+
+-- 1. get the list of country names and the number of students from each one.
+SELECT count(students.country_id) as students_number , countries.name  
+from students
+right join countries
+on students.country_id = countries.id 
+group by countries.name;
+
+-- 2. get a list of all students and for each
+--    student get the number of courses they are registered in.
+SELECT students.name, count(student_courses.student_id)
+from student_courses 
+right join students
+on students.id = student_courses.student_id
+group by students.name;
+
+-- 3. get a list of all courses that have 5 students or more registered in them.
+SELECT courses.id as course_id , 
+count(student_courses.course_id) as Registered_Number 
+from courses
+right join student_courses
+on courses.id = student_courses.course_id
+group by courses.id
+HAVING count(student_courses.course_id) > 1;
+
+-- 4.for each course, get the course number, course name,
+--   and get the student number, student name and grade of students 
+--   in that course who received a grade of 90 or above.
+select courses.course_number, courses.title, students.`registration_number‏`, students.name, student_courses.grade from student_courses 
+join courses
+on student_courses.course_id = courses.id
+join students
+on student_courses.student_id = students.id
+where grade >= 90;
